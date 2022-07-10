@@ -158,7 +158,7 @@ MonoBehaviour:
   LogLevel: 1
   NetworkConfig:
     ProtocolVersion: 0
-    NetworkTransport: {fileID: 0}
+    NetworkTransport: {fileID: 43508715}
     PlayerPrefab: {fileID: 0}
     NetworkPrefabs: []
     TickRate: 30

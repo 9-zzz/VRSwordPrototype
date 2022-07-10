@@ -2,10 +2,11 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
+using System.IO;
 
 public class NetworkPlayer : NetworkBehaviour
 {
-
     [SerializeField]
     private Vector2 placementArea = new Vector2(-10.0f,10.0f);
 
@@ -20,15 +21,16 @@ public class NetworkPlayer : NetworkBehaviour
         {
             var clientMoveProvider = GetComponent<NetworkMoveProvider>();
             var clientControllers = GetComponentsInChildren<ActionBasedController>();
-            var clientTurnProvider = GetComponent<ActionBasedContinuousTurnProvider>();
+            //var clientTurnProvider = GetComponent<ActionBasedContinuousTurnProvider>();
+            var clientTurnProvider = GetComponent<ActionBasedSnapTurnProvider>();
             var clientHead = GetComponentsInChildren<TrackedPoseDriver>(); 
             var clientCamera = GetComponentsInChildren<Camera>();
 
-            clientCamera.enabled = false;
-            clientMoveProvider.enableInputActions = false;
+            clientCamera[0].enabled = false;
+            GetComponent<NetworkMoveProvider>().enableInputActions = false;
             clientTurnProvider.enableTurnLeftRight = false;
             clientTurnProvider.enableTurnAround = false;
-            clientHead.enabled = false;
+            clientHead[0].enabled = false;
 
             foreach (var controller in clientControllers)
             {
@@ -76,7 +78,8 @@ public class NetworkPlayer : NetworkBehaviour
         }
         else
         {
-            Logger.Instance.LogWarning($"Unable to change ownership for clientid {newOwnerClientId}");
+            //Logger.Instance.LogWarning($"Unable to change ownership for clientid {newOwnerClientId}");
+            print("idklogger");
         }
 
     }

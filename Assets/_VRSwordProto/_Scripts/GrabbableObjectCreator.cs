@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class GrabbableObjectCreator : MonoBehaviour
+public class GrabbableObjectCreator : NetworkBehaviour
 {
     [SerializeField] 
     private GameObject[] prefabs;
@@ -28,7 +28,7 @@ public class GrabbableObjectCreator : MonoBehaviour
 
                 float randomSize = Random.Range(prefabSizes.x, prefabSizes.y); 
                 go.transform.localScale = new Vector3(randomSize, randomSize, randomSize); 
-                go.GetComponent<Networkobject>().Spawn();
+                go.GetComponent<NetworkObject>().Spawn();
             }
         }
     }
